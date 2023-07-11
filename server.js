@@ -4,8 +4,11 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const app = express()
 app.use(cors())
 async function Collegamento(){
-    const MymongoClient=new MongoClient("mongodb+srv://admin:PjxuwGMAlkPGzAJX@servermongodbprovamonas.xqbrdmt.mongodb.net/ProvaMonasteroStella?retryWrites=true&w=majority")
-    const data = await MymongoClient.db().collection("Eventi").find().toArray()
+    while (true) {
+        const MymongoClient=new MongoClient("mongodb+srv://admin:PjxuwGMAlkPGzAJX@servermongodbprovamonas.xqbrdmt.mongodb.net/ProvaMonasteroStella?retryWrites=true&w=majority")
+        const data = await MymongoClient.db().collection("Eventi").find().toArray()
+        await delay(20000)
+    }
     app.get("/",(re,res)=>{
         return res.json("Backend")
     })
